@@ -1,0 +1,2 @@
+# hotel_project
+这是一个采用Springboot的框架开发的酒店管理系统，利用Mybatis框架管理数据库
