@@ -1,0 +1,102 @@
+<%@ page pageEncoding="UTF-8" %>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>在线酒店系统</title>
+    <link rel="stylesheet" href="../../static/MDUI_files/mdui.min.css">
+    <link rel="stylesheet" href="../../static/MDUI_files/style.css">
+    <script src="https://hm.baidu.com/hm.js?33d719afc3e48d8a2fbdd886b164d2e4"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?33d719afc3e48d8a2fbdd886b164d2e4";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <script>
+        function logout() {
+            var form1 = document.getElementById("form1");
+            form1.action = "Userlogout";
+            form1.submit();
+        }
+    </script>
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+
+
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0 !important;
+    }
+    </style>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink mdui-loaded"
+      style="">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a href="go?url=bookOnline/Index" class="mdui-typo-title">在线预定系统</a>
+    </div>
+</header>
+
+<div class="mdui-drawer" id="main-drawer">
+    <div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="BookRoom">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">客房预订</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=bookOnline/RoomQuery" class="mdui-list-item mdui-ripple "
+                   id="AvailableRoomQuery">可用房查询</a>
+            </div>
+        </div>
+
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="PersonalSetting">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">个人设置</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=bookOnline/PersonalInformation" class="mdui-list-item mdui-ripple "
+                   id="PersonalInformation">个人信息</a>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=bookOnline/ChangePassword" class="mdui-list-item mdui-ripple "
+                   id="ChangePassword">修改密码</a>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <form id="form1">
+                <a class="mdui-list-item mdui-ripple " onclick="logout()">退出</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="AboutHotel">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">关于酒店</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=bookOnline/Index" class="mdui-list-item mdui-ripple "
+                   id="HotelInfomation">酒店信息</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $$ = mdui.JQ;
+
+    $$(function () {
+        // appbar 自动隐藏
+        var $appbar = $$('.mdui-appbar');
+        $$(window).on('scroll', function () {
+            $appbar[document.body.scrollTop === 0 ? 'addClass' : 'removeClass']('mdui-shadow-0');
+        });
+    });
+</script>
+</body>
+</html>
+

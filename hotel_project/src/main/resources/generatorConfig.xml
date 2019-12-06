@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="C:\Users\y5656\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>
+
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!--        设置生成的类里面不生成时间标签和解释注释-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/hotelmanagementsystem?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"
+                        userId="root"
+                        password="12345678">
+            <!--数据库MySQL 8.0version不生成其他多余的类-->
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.example.hotel_project.Model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="Mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="demo.Dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <table tableName="administrator" domainObjectName="Administrator"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="comment" domainObjectName="Comment"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="customer" domainObjectName="Customer"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="employee" domainObjectName="Employee"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="hotel" domainObjectName="Hotel"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="orders" domainObjectName="Orders"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="question" domainObjectName="Question"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="room" domainObjectName="Room"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="roomcategory" domainObjectName="Roomcategory"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--不使用默认驼峰式-->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>

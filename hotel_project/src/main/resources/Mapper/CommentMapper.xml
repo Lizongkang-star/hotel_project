@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Comment">
+        <result column="coment_id" jdbcType="INTEGER" property="coment_id"/>
+        <result column="customer_Id" jdbcType="VARCHAR" property="customer_Id"/>
+        <result column="comment_time" jdbcType="TIMESTAMP" property="comment_time"/>
+        <result column="comment_content" jdbcType="VARCHAR" property="comment_content"/>
+        <result column="room_number" jdbcType="VARCHAR" property="room_number"/>
+        <result column="comment_type" jdbcType="VARCHAR" property="comment_type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    comment_id,customer_Id,comment_time,comment_content,room_number,comment_type
+  </sql>
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Comment">
+    insert into comment (coment_id, customer_Id, comment_time, 
+      comment_content, room_number, comment_type
+      )
+    values (#{coment_id,jdbcType=INTEGER}, #{customer_Id,jdbcType=VARCHAR}, #{comment_time,jdbcType=TIMESTAMP}, 
+      #{comment_content,jdbcType=VARCHAR}, #{room_number,jdbcType=VARCHAR}, #{comment_type,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Comment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coment_id != null">
+                coment_id,
+            </if>
+            <if test="customer_Id != null">
+                customer_Id,
+            </if>
+            <if test="comment_time != null">
+                comment_time,
+            </if>
+            <if test="comment_content != null">
+                comment_content,
+            </if>
+            <if test="room_number != null">
+                room_number,
+            </if>
+            <if test="comment_type != null">
+                comment_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="coment_id != null">
+                #{coment_id,jdbcType=INTEGER},
+            </if>
+            <if test="customer_Id != null">
+                #{customer_Id,jdbcType=VARCHAR},
+            </if>
+            <if test="comment_time != null">
+                #{comment_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comment_content != null">
+                #{comment_content,jdbcType=VARCHAR},
+            </if>
+            <if test="room_number != null">
+                #{room_number,jdbcType=VARCHAR},
+            </if>
+            <if test="comment_type != null">
+                #{comment_type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

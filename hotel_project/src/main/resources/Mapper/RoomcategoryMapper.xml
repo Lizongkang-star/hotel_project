@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.RoomcategoryMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Roomcategory">
+        <result column="roomcategory_id" jdbcType="INTEGER" property="roomcategory_id"/>
+        <result column="roomcategory_name" jdbcType="VARCHAR" property="roomcategory_name"/>
+        <result column="roomcategory_price" jdbcType="DOUBLE" property="roomcategory_price"/>
+        <result column="total_number" jdbcType="INTEGER" property="total_number"/>
+        <result column="roomcategory_score" jdbcType="DOUBLE" property="roomcategory_score"/>
+        <result column="locked_number" jdbcType="INTEGER" property="locked_number"/>
+        <result column="inuse_roomnumber" jdbcType="INTEGER" property="inuse_roomnumber"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    roomcategory_id,roomcategory_name,roomcategory_price,total_number,roomcategory_score,locked_number,inuse_roomnumber
+  </sql>
+
+<!--    查找-->
+
+    <select id="getallcategoryid" resultType="java.lang.String">
+        select
+        roomcategory_id
+        from roomcategory
+    </select>
+
+    <select id="getRoomPreservationInitialize" resultMap="BaseResultMap">
+        select * from roomcategory order by roomcategory_name;
+    </select>
+
+    <select id="getTypeAndPrice" resultType="java.util.HashMap">
+        select roomcategory_name as name,roomcategory_price as price from roomcategory order by roomcategory_name;
+    </select>
+    <select id="getAllCategoryName" resultType="java.lang.String">
+        select roomcategory_name from hotelmanagementsystem.roomcategory group by roomcategory_name;
+    </select>
+
+
+<!--    插入-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Roomcategory">
+    insert into roomcategory (roomcategory_id, roomcategory_name, 
+      roomcategory_price, total_number, roomcategory_score, 
+      locked_number, inuse_roomnumber)
+    values (#{roomcategory_id,jdbcType=INTEGER}, #{roomcategory_name,jdbcType=VARCHAR}, 
+      #{roomcategory_price,jdbcType=DOUBLE}, #{total_number,jdbcType=INTEGER}, #{roomcategory_score,jdbcType=DOUBLE}, 
+      #{locked_number,jdbcType=INTEGER}, #{inuse_roomnumber,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Roomcategory">
+        insert into roomcategory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomcategory_id != null">
+                roomcategory_id,
+            </if>
+            <if test="roomcategory_name != null">
+                roomcategory_name,
+            </if>
+            <if test="roomcategory_price != null">
+                roomcategory_price,
+            </if>
+            <if test="total_number != null">
+                total_number,
+            </if>
+            <if test="roomcategory_score != null">
+                roomcategory_score,
+            </if>
+            <if test="locked_number != null">
+                locked_number,
+            </if>
+            <if test="inuse_roomnumber != null">
+                inuse_roomnumber,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomcategory_id != null">
+                #{roomcategory_id,jdbcType=INTEGER},
+            </if>
+            <if test="roomcategory_name != null">
+                #{roomcategory_name,jdbcType=VARCHAR},
+            </if>
+            <if test="roomcategory_price != null">
+                #{roomcategory_price,jdbcType=DOUBLE},
+            </if>
+            <if test="total_number != null">
+                #{total_number,jdbcType=INTEGER},
+            </if>
+            <if test="roomcategory_score != null">
+                #{roomcategory_score,jdbcType=DOUBLE},
+            </if>
+            <if test="locked_number != null">
+                #{locked_number,jdbcType=INTEGER},
+            </if>
+            <if test="inuse_roomnumber != null">
+                #{inuse_roomnumber,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+
+
+<!--    修改-->
+    <update id="updateRoomcategory" parameterType="com.example.hotel_project.Model.Roomcategory">
+        update hotelmanagementsystem.roomcategory
+        <set>
+            <if test="roomcategory_name != null">
+                roomcategory_name = #{roomcategory_name,jdbcType=VARCHAR},
+            </if>
+            <if test="roomcategory_price != null">
+                roomcategory_price = #{roomcategory_price,jdbcType=DOUBLE},
+            </if>
+            <if test="total_number != null">
+                total_number = #{total_number,jdbcType=INTEGER},
+            </if>
+            <if test="roomcategory_score != null">
+                roomcategory_score = #{roomcategory_score,jdbcType=DOUBLE},
+            </if>
+            <if test="locked_number != null">
+                locked_number = #{locked_number,jdbcType=INTEGER},
+            </if>
+            <if test="inuse_roomnumber != null">
+                inuse_roomnumber = #{inuse_roomnumber,jdbcType=INTEGER},
+            </if>
+        </set>
+        where roomcategory_id = #{roomcategory_id,jdbcType=INTEGER}
+    </update>
+
+
+</mapper>

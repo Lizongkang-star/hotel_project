@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.HotelMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Hotel">
+        <result column="location_info" jdbcType="VARCHAR" property="location_info"/>
+        <result column="traffic_Info" jdbcType="VARCHAR" property="traffic_Info"/>
+        <result column="hotel_name" jdbcType="VARCHAR" property="hotel_name"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    location_info,traffic_Info,hotel_name,introdution
+  </sql>
+
+    <!--  查询-->
+
+
+    <!--    获取酒店对象-->
+    <select id="getHotelinfo" resultMap="BaseResultMap">
+        select *
+        from hotel
+    </select>
+
+
+    <!--    插入-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Hotel">
+    insert into hotel (location_info, traffic_Info, hotel_name, 
+      introduction)
+    values (#{location_info,jdbcType=VARCHAR}, #{traffic_Info,jdbcType=VARCHAR}, #{hotel_name,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Hotel">
+        insert into hotel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="location_info != null">
+                location_info,
+            </if>
+            <if test="traffic_Info != null">
+                traffic_Info,
+            </if>
+            <if test="hotel_name != null">
+                hotel_name,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="location_info != null">
+                #{location_info,jdbcType=VARCHAR},
+            </if>
+            <if test="traffic_Info != null">
+                #{traffic_Info,jdbcType=VARCHAR},
+            </if>
+            <if test="hotel_name != null">
+                #{hotel_name,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--    修改-->
+    <update id="changeinfo" parameterType="com.example.hotel_project.Model.Hotel">
+        update hotelmanagementsystem.hotel
+        <set>
+            <if test="hotel_name != null">
+                hotel_name = #{hotel_name,jdbcType=VARCHAR},
+            </if>
+            <if test="location_info != null">
+                location_info = #{location_info,jdbcType=VARCHAR},
+            </if>
+            <if test="traffic_Info != null">
+                traffic_Info = #{traffic_Info,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+        </set>
+    </update>
+</mapper>

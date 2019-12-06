@@ -1,0 +1,136 @@
+<%@ page pageEncoding="UTF-8" %>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>在线酒店系统</title>
+    <link rel="stylesheet" href="../../static/MDUI_files/mdui.min.css">
+    <link rel="stylesheet" href="../../static/MDUI_files/style.css">
+    <script src="https://hm.baidu.com/hm.js?33d719afc3e48d8a2fbdd886b164d2e4"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?33d719afc3e48d8a2fbdd886b164d2e4";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script>
+        function logout() {
+            var form1 = document.getElementById("form1");
+            form1.action = "AdminLogout";
+            form1.submit();
+        }
+    </script>
+    <style></style>
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink mdui-loaded"
+      style="">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a href="go?url=basicSetting/Index" class="mdui-typo-title">经理管理</a>
+        <div class="mdui-toolbar-spacer"></div>
+    </div>
+</header>
+
+<div class="mdui-drawer" id="main-drawer">
+    <div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="BasicSetting">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">基础设置</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=basicSetting/RoomTypeSetting" class="mdui-list-item mdui-ripple " id="RoomTypeSetting">客房类型设置</a>
+                <a href="go?url=basicSetting/RoomInformationSettingID" class="mdui-list-item mdui-ripple "
+                   id="RoomInformationSetting">客房信息设置</a>
+            </div>
+        </div>
+
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="AccountSetting">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">账号管理</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=basicSetting/CustomerSetting" class="mdui-list-item mdui-ripple " id="CustomerSetting">客户账号管理</a>
+                <a href="go?url=basicSetting/ReceptionistSetting" class="mdui-list-item mdui-ripple "
+                   id="ReceptionistSetting">接待员账号管理</a>
+            </div>
+        </div>
+
+        <div class="mdui-collapse-item mdui-collapse-item-close" id="RoomPreservationManagement">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">预定管理</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="RoomPreservationInitialize" class="mdui-list-item mdui-ripple "
+                   id="RoomPreservation">控房功能</a>
+                <a href="go?url=basicSetting/BookManagement" class="mdui-list-item mdui-ripple " id="BookManagement">预订单管理</a>
+                <a href="go?url=basicSetting/GroupBook" class="mdui-list-item mdui-ripple " id="GroupBook">团体预定</a>
+
+            </div>
+        </div>
+
+        <div class="mdui-collapse-item mdui-collapse-item-close" id="RoomManagement">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">客房管理</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=basicSetting/RoomReport" class="mdui-list-item mdui-ripple " id="RoomReport">房态统计</a>
+                <a href="go?url=basicSetting/SaleReportOfMonth" class="mdui-list-item mdui-ripple " id="SaleReportOfMonth">销售月报表</a>
+                <a href="adminReportOfLivingCustomer" class="mdui-list-item mdui-ripple "
+                   id="ReportOfLivingCustomer">在住客人报表</a>
+                <a href="go?url=basicSetting/ReportOfLivingGroup" class="mdui-list-item mdui-ripple "
+                   id="ReportOfLivingGroup">在住团队报表</a>
+                <a href="adminReportOfPreservationCustomer" class="mdui-list-item mdui-ripple "
+                   id="ReportOfPreservationCustomer">预定客人报表</a>
+                <a href="adminReportOfLivedCustomer" class="mdui-list-item mdui-ripple "
+                   id="ReportOfLivedCustomer">历史客人列表</a>
+            </div>
+        </div>
+
+
+        <div class="mdui-collapse-item mdui-collapse-item-close " id="PersonalSetting">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-content">关于账号</div>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="go?url=basicSetting/ChangePassword" class="mdui-list-item mdui-ripple "
+                   id="ChangePassword">修改密码</a>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <form id="form1">
+                    <a class="mdui-list-item mdui-ripple " onclick="logout()">退出</a>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!--&lt;!&ndash; 首屏 &ndash;&gt;-->
+<!--<div class="mdui-container doc-container" style="display: flex;flex-direction: column;">-->
+<!--<div class="mdui-container main-container" style="display: flex;flex-direction: column;justify-content: center;">-->
+
+<script type="text/javascript">
+    var $$ = mdui.JQ;
+
+    $$(function () {
+        // appbar 自动隐藏
+        var $appbar = $$('.mdui-appbar');
+        $$(window).on('scroll', function () {
+            $appbar[document.body.scrollTop === 0 ? 'addClass' : 'removeClass']('mdui-shadow-0');
+        });
+    });
+</script>
+</body>
+</html>
+

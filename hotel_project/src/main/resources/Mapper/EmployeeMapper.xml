@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.EmployeeMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Employee">
+        <result column="employee_id" jdbcType="INTEGER" property="employee_id"/>
+        <result column="employee_username" jdbcType="VARCHAR" property="employee_username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="employee_name" jdbcType="VARCHAR" property="employee_name"/>
+        <result column="employee_gender" jdbcType="VARCHAR" property="employee_gender"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    employee_id,employee_username,password,employee_name,employee_gender
+  </sql>
+
+
+    <!--  查找-->
+    <select id="getallemployeeid" resultType="java.lang.String">
+        select employee_id from employee order by employee_id
+    </select>
+
+    <select id="getEmployeeByUsername" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from hotelmanagementsystem.employee
+        where employee_username = #{employee_username,jdbcType=VARCHAR};
+    </select>
+
+
+    <!--    获取所有对象-->
+    <select id="getAllEmployee" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/>
+        from hotelmanagementsystem.employee
+    </select>
+
+    <!--    按照Id查找员工-->
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where employee_id = #{employee_id,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="employeeconfirm" parameterType="com.example.hotel_project.Model.Employee" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where employee_username = #{employee_username,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+    <!--    此处注意上面花括号的属性与实体类的属性名一致，mybatis自动取值-->
+
+
+    <!--    插入-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Employee">
+    insert into employee (employee_id, employee_username, password, 
+      employee_name, employee_gender)
+    values (#{employee_id,jdbcType=INTEGER}, #{employee_username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{employee_name,jdbcType=VARCHAR}, #{employee_gender,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Employee">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employee_id != null">
+                employee_id,
+            </if>
+            <if test="employee_username != null">
+                employee_username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="employee_name != null">
+                employee_name,
+            </if>
+            <if test="employee_gender != null">
+                employee_gender,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employee_id != null">
+                #{employee_id,jdbcType=INTEGER},
+            </if>
+            <if test="employee_username != null">
+                #{employee_username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="employee_name != null">
+                #{employee_name,jdbcType=VARCHAR},
+            </if>
+            <if test="employee_gender != null">
+                #{employee_gender,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--    修改-->
+    <update id="updateEmployee" parameterType="com.example.hotel_project.Model.Employee">
+        update employee
+        <set>
+            <if test="employee_username != null">
+                employee_username = #{employee_username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="employee_name != null">
+                employee_name = #{employee_name,jdbcType=VARCHAR},
+            </if>
+            <if test="employee_gender != null">
+                employee_gender = #{employee_gender,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where employee_id = #{employee_id,jdbcType=INTEGER}
+    </update>
+
+
+    <!--    删除-->
+
+    <delete id="deleteEmployeeeById" parameterType="java.lang.Integer">
+        delete from employee
+        where employee_id = #{param1}
+    </delete>
+
+</mapper>

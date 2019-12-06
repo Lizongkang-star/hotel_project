@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.AdministratorMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Administrator">
+        <result column="admin_id" jdbcType="INTEGER" property="admin_id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="admin_name" jdbcType="VARCHAR" property="admin_name"/>
+        <result column="admin_gender" jdbcType="VARCHAR" property="admin_gender"/>
+        <result column="admin_type" jdbcType="VARCHAR" property="admin_type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    admin_id,username,password,admin_name,admin_gender,admin_type
+  </sql>
+
+    <!--    增加-->
+    <!--    插入新管理员-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Administrator">
+    insert into administrator (admin_id, username, password, 
+      admin_name, admin_gender, admin_type
+      )
+    values (#{admin_id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{admin_name,jdbcType=VARCHAR}, #{admin_gender,jdbcType=VARCHAR}, #{admin_type,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Administrator">
+        insert into administrator
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="admin_id != null">
+                admin_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="admin_name != null">
+                admin_name,
+            </if>
+            <if test="admin_gender != null">
+                admin_gender,
+            </if>
+            <if test="admin_type != null">
+                admin_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="admin_id != null">
+                #{admin_id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_name != null">
+                #{admin_name,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_gender != null">
+                #{admin_gender,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_type != null">
+                #{admin_type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--    查找-->
+
+    <!--    管理员验证-->
+    <select id="adminconfirm" parameterType="com.example.hotel_project.Model.Administrator" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from administrator
+        where username = #{username,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--    更新-->
+    <update id="updateAdmin"  parameterType="com.example.hotel_project.Model.Administrator" >
+        update administrator
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_name != null">
+                admin_name = #{admin_name,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_gender != null">
+                admin_gender = #{admin_gender,jdbcType=VARCHAR},
+            </if>
+            <if test="admin_type != null">
+                admin_type = #{admin_type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where admin_id = #{admin_id,jdbcType=INTEGER}
+    </update>
+
+
+
+
+</mapper>

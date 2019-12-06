@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.QuestionMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Question">
+        <result column="question_id" jdbcType="INTEGER" property="question_id"/>
+        <result column="question_content" jdbcType="VARCHAR" property="question_content"/>
+        <result column="sender" jdbcType="VARCHAR" property="sender"/>
+        <result column="send_time" jdbcType="TIMESTAMP" property="send_time"/>
+        <result column="question_response" jdbcType="VARCHAR" property="question_response"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    question_id,question_content,sender,send_time,question_response
+  </sql>
+
+<!--    查找-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Question">
+    insert into question (question_id, question_content, sender, 
+      send_time, question_response)
+    values (#{question_id,jdbcType=INTEGER}, #{question_content,jdbcType=VARCHAR}, #{sender,jdbcType=VARCHAR}, 
+      #{send_time,jdbcType=TIMESTAMP}, #{question_response,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Question">
+        insert into question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="question_id != null">
+                question_id,
+            </if>
+            <if test="question_content != null">
+                question_content,
+            </if>
+            <if test="sender != null">
+                sender,
+            </if>
+            <if test="send_time != null">
+                send_time,
+            </if>
+            <if test="question_response != null">
+                question_response,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="question_id != null">
+                #{question_id,jdbcType=INTEGER},
+            </if>
+            <if test="question_content != null">
+                #{question_content,jdbcType=VARCHAR},
+            </if>
+            <if test="sender != null">
+                #{sender,jdbcType=VARCHAR},
+            </if>
+            <if test="send_time != null">
+                #{send_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="question_response != null">
+                #{question_response,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

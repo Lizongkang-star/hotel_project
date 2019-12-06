@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.CustomerMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Customer">
+        <result column="customer_id" jdbcType="INTEGER" property="customer_id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="real_name" jdbcType="VARCHAR" property="real_name"/>
+        <result column="customer_phone" jdbcType="VARCHAR" property="customer_phone"/>
+        <result column="id_card" jdbcType="VARCHAR" property="id_card"/>
+        <result column="customer_gender" jdbcType="VARCHAR" property="customer_gender"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    customer_id,username,password,real_name,customer_phone,id_card,customer_gender
+  </sql>
+
+
+    <!--  增加-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Customer">
+    insert into customer (username, password,
+      real_name, customer_phone, id_card, 
+      customer_gender)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{real_name,jdbcType=VARCHAR}, #{customer_phone,jdbcType=VARCHAR}, #{id_card,jdbcType=VARCHAR}, 
+      #{customer_gender,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Customer">
+        insert into customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customer_id != null">
+                customer_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="real_name != null">
+                real_name,
+            </if>
+            <if test="customer_phone != null">
+                customer_phone,
+            </if>
+            <if test="id_card != null">
+                id_card,
+            </if>
+            <if test="customer_gender != null">
+                customer_gender,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customer_id != null">
+                #{customer_id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="real_name != null">
+                #{real_name,jdbcType=VARCHAR},
+            </if>
+            <if test="customer_phone != null">
+                #{customer_phone,jdbcType=VARCHAR},
+            </if>
+            <if test="id_card != null">
+                #{id_card,jdbcType=VARCHAR},
+            </if>
+            <if test="customer_gender != null">
+                #{customer_gender,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--    删除-->
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        delete from customer
+        where customer_id = #{customer_id,jdbcType=INTEGER}
+    </delete>
+
+
+    <!--    修改-->
+
+    <!--    更新身份证信息-->
+    <update id="updateIdcard">
+        update customer set id_card = param2 where customer_id = #{param1}
+    </update>
+    <!--    更新密码-->
+    <update id="updatePassword">
+        update customer set password = param2 here customer_id = #{param1}
+    </update>
+    <!--    更新用户名-->
+    <update id="updateUsername">
+        update customer set username = param2 where customer_id = #{param1}
+    </update>
+
+    <update id="updateUser" parameterType="com.example.hotel_project.Model.Customer">
+        update customer
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="real_name != null">
+                real_name = #{real_name,jdbcType=VARCHAR},
+            </if>
+            <if test="customer_phone != null">
+                customer_phone = #{customer_phone,jdbcType=VARCHAR},
+            </if>
+            <if test="id_card != null">
+                id_card = #{id_card,jdbcType=VARCHAR},
+            </if>
+            <if test="customer_gender != null">
+                customer_gender = #{customer_gender,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where customer_id = #{customer_id,jdbcType=INTEGER}
+    </update>
+
+
+    <!--查询-->
+
+    <!--    根据用户名查找-->
+    <select id="queryByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryByUsernamePassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer where username = #{param1} and password = #{param2};
+    </select>
+
+    <!--    根据用户Id查找-->
+    <select id="queryByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where customer_id = #{customer_id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--    用户认证-->
+    <!--    语句类似于select customer_id,username,password,real_name,customer_phone,id_card,customer_gender from administrator  where username = ?  and password = ?-->
+    <select id="customerconfirm" parameterType="com.example.hotel_project.Model.Customer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where username = #{username,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+    <!--    获取所有用户对象-->
+    <select id="getAllCustomers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+    </select>
+
+
+    <!--    根据用户id查找-->
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <!--    获取所有客户id-->
+    <select id="getAllCustomersId" resultType="java.lang.String">
+        select
+        customer_id
+        from customer
+    </select>
+
+    <!--    获取所有客户订单-->
+    <select id="selectAllOrders" parameterType="java.lang.Integer" resultType="com.example.hotel_project.Model.Orders">
+        select
+        *
+        from orders
+        where customer_id = #{param1}
+    </select>
+
+
+    <!--    查询在住客户-->
+    <select id="queryCustomersLiving" resultType="HashMap">
+        select
+        customer.customer_id,customer.id_card,customer.real_name as realname,room_number,start_time,end_time
+        from customer
+        left join orders on customer.id_card = orders.customer_idcard
+        where (orders.orders_status='在住') order by customer.customer_id
+    </select>
+
+    <!--    查询预订客户-->
+    <select id="queryCustomersPreservation" resultType="HashMap">
+        select
+        customer.customer_id,customer.id_card,customer.real_name as realname,room_number,start_time,end_time
+        from customer
+        left join orders on customer.id_card = orders.customer_idcard
+        where (orders.orders_status='预定') order by customer.customer_id
+    </select>
+
+    <!--    查询历史客户-->
+    <select id="queryCustomersLived" resultType="HashMap">
+        select
+        customer.customer_id,customer.id_card,customer.real_name as realname,room_number,start_time,end_time
+        from customer
+        left join orders on customer.id_card = orders.customer_idcard
+        where (orders.orders_status='已退房') order by customer.customer_id
+    </select>
+
+    <!--    查询不可达房间类型和数量  &lt;= 小于等于  &gt;=  大于等于-->
+    <select id="getUnavailableRoomTypeWithNumber" resultType="java.util.HashMap">
+        select
+        orders_type as room_type,count(orders_id)as number
+        from customer
+        left join orders on customer.username = orders.customer_id
+        where (orders.orders_status = '在住' or orders.orders_status = '预定') and
+        ((start_time &lt;= #{param1} and end_time &gt;= #{param1}) or (start_time &lt;= #{param2} AND end_time &gt;= #{param2}) OR
+         (start_time &lt;= #{param1} AND end_time &gt;= #{param2}) OR
+          (start_time &lt;= #{param2} AND end_time &gt;= #{param1}))
+        order by orders_type
+    </select>
+
+
+</mapper>

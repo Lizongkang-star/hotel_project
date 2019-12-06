@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel_project.Dao.RoomMapper">
+    <resultMap id="BaseResultMap" type="com.example.hotel_project.Model.Room">
+        <result column="room_id" jdbcType="INTEGER" property="room_id"/>
+        <result column="room_number" jdbcType="VARCHAR" property="room_number"/>
+        <result column="room_type" jdbcType="VARCHAR" property="room_type"/>
+        <result column="room_floor" jdbcType="VARCHAR" property="room_floor"/>
+        <result column="room_direction" jdbcType="VARCHAR" property="room_direction"/>
+        <result column="room_square" jdbcType="DOUBLE" property="room_square"/>
+        <result column="can_addbed" jdbcType="VARCHAR" property="can_addbed"/>
+        <result column="bed_num" jdbcType="INTEGER" property="bed_num"/>
+        <result column="room_description" jdbcType="VARCHAR" property="room_description"/>
+        <result column="room_status" jdbcType="VARCHAR" property="room_status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    room_id,room_number,room_type,room_floor,room_square,can_addbed,bed_num,room_description,room_status
+  </sql>
+
+    <!--    查找-->
+    <select id="getallroomid" resultType="java.lang.String">
+        select room_id from room order by room_id
+    </select>
+
+    <!--    获取所有不可用房间-->
+    <!--    要补充where...-->
+    <select id="getRoomUnavailableBetween" parameterType="java.util.Date" resultMap="BaseResultMap">
+        select count(room_type), room_type from room group by room_type;
+    </select>
+    <select id="getAllRoomTypeWithNumber" resultType="java.util.HashMap">
+        select room_type,count(*)as number from room group by room_type
+        order by room_type;
+    </select>
+
+    <!--    通过房间类型获取房间-->
+    <select id="getAllRoomByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from room where room_type = #{param1};
+    </select>
+
+    <select id="roomQueryByID" resultMap="BaseResultMap">
+        select * from room where room_id = #{param1};
+    </select>
+
+    <select id="getAllRoomName" resultType="java.lang.String">
+        select room_number from hotelmanagementsystem.room;
+    </select>
+
+
+    <!--    根据订单号查询可用房间-->
+    <select id="getAvailableRoomByOrdersId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select room.room_id,room.room_number,room.room_type,room.room_floor,room.room_direction,
+                room.room_description,room.room_status
+        from room
+        left join orders
+        on orders.orders_type = room.room_type
+        where orders.orders_id = #{param1} and room.room_status='可用'
+    </select>
+
+    <select id="selectRoomByNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hotelmanagementsystem.room where room_number = #{param1};
+    </select>
+
+
+    <!--    删除-->
+
+    <delete id="deleteRoomById" parameterType="java.lang.Integer">
+        delete from room where room_id = #{param1}
+    </delete>
+    <delete id="deleteRoomByName" parameterType="java.lang.String">
+        delete from room where room_number = #{param1}
+    </delete>
+
+
+    <!--    修改-->
+
+    <!--    更新房间信息  比较通用的更新方法,可以更新0-n个数据项-->
+    <update id="updateRoomInfo" parameterType="com.example.hotel_project.Model.Room">
+        update room
+        <set>
+            <if test="room_number != null">
+                room_number = #{room_number,jdbcType=VARCHAR},
+            </if>
+            <if test="room_type != null">
+                room_type = #{room_type,jdbcType=VARCHAR},
+            </if>
+            <if test="room_floor != null">
+                room_floor = #{room_floor,jdbcType=VARCHAR},
+            </if>
+            <if test="room_direction != null">
+                room_direction = #{room_direction,jdbcType=INTEGER},
+            </if>
+            <if test="room_description != null">
+                room_description = #{room_description,jdbcType=VARCHAR},
+            </if>
+            <if test="room_status != null">
+                room_status = #{room_status,jdbcType=VARCHAR},
+            </if>
+            <if test="room_square != null">
+                room_square = #{room_square,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where room_id = #{room_id,jdbcType=INTEGER}
+    </update>
+
+    <!--    更换房间号-->
+    <update id="updateRoomNumberByRoomID">
+        update room set room_number = #{param2} where room_id = #{param1};
+    </update>
+
+
+    <!--    更改房间信息-->
+    <update id="updateStatusByRoomID">
+        update room
+        set room_status = #{param2}
+        where room_id = #{param1}
+    </update>
+    <update id="updateRoomNumberByRoomId">
+        update room
+        set room_number = #{param2}
+        where room_id = #{param1}
+    </update>
+    <update id="updateStatusByRoomNum">
+        update hotelmanagementsystem.room
+        set room_status = #{param2}
+        where room_number = #{param1}
+    </update>
+
+    <!--    新建-->
+    <insert id="insert" parameterType="com.example.hotel_project.Model.Room">
+    insert into room (room_id, room_number, room_type, 
+      room_floor, room_direction, room_square, 
+      can_addbed, bed_num, room_description, 
+      room_status)
+    values (#{room_id,jdbcType=INTEGER}, #{room_number,jdbcType=VARCHAR}, #{room_type,jdbcType=VARCHAR}, 
+      #{room_floor,jdbcType=VARCHAR}, #{room_direction,jdbcType=VARCHAR}, #{room_square,jdbcType=DOUBLE}, 
+      #{can_addbed,jdbcType=VARCHAR}, #{bed_num,jdbcType=INTEGER}, #{room_description,jdbcType=VARCHAR}, 
+      #{room_status,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.hotel_project.Model.Room">
+        insert into room
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="room_id != null">
+                room_id,
+            </if>
+            <if test="room_number != null">
+                room_number,
+            </if>
+            <if test="room_type != null">
+                room_type,
+            </if>
+            <if test="room_floor != null">
+                room_floor,
+            </if>
+            <if test="room_direction != null">
+                room_direction,
+            </if>
+            <if test="room_square != null">
+                room_square,
+            </if>
+            <if test="can_addbed != null">
+                can_addbed,
+            </if>
+            <if test="bed_num != null">
+                bed_num,
+            </if>
+            <if test="room_description != null">
+                room_description,
+            </if>
+            <if test="room_status != null">
+                room_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="room_id != null">
+                #{room_id,jdbcType=INTEGER},
+            </if>
+            <if test="room_number != null">
+                #{room_number,jdbcType=VARCHAR},
+            </if>
+            <if test="room_type != null">
+                #{room_type,jdbcType=VARCHAR},
+            </if>
+            <if test="room_floor != null">
+                #{room_floor,jdbcType=VARCHAR},
+            </if>
+            <if test="room_direction != null">
+                #{room_direction,jdbcType=VARCHAR},
+            </if>
+            <if test="room_square != null">
+                #{room_square,jdbcType=DOUBLE},
+            </if>
+            <if test="can_addbed != null">
+                #{can_addbed,jdbcType=VARCHAR},
+            </if>
+            <if test="bed_num != null">
+                #{bed_num,jdbcType=INTEGER},
+            </if>
+            <if test="room_description != null">
+                #{room_description,jdbcType=VARCHAR},
+            </if>
+            <if test="room_status != null">
+                #{room_status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
