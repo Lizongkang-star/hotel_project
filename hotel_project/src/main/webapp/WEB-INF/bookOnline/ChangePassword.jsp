@@ -2,7 +2,7 @@
 <%@include file="DrawerBar.html" %>
 <html>
 <head>
-    <jsp:useBean id="LoginedCustomer" type="demo.Model.Customer" scope="session"></jsp:useBean>
+    <jsp:useBean id="LoginedCustomer" type="com.example.hotel_project.Model.Customer" scope="session"></jsp:useBean>
     
     <title>修改密码</title>
     

@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <jsp:useBean id="LoginedCustomer" scope="session" type="demo.Model.Customer"></jsp:useBean>
+            <jsp:useBean id="LoginedCustomer" scope="session" type="com.example.hotel_project.Model.Customer"></jsp:useBean>
             <tr>
                 <td>
                     <jsp:getProperty name="LoginedCustomer" property="username"></jsp:getProperty>

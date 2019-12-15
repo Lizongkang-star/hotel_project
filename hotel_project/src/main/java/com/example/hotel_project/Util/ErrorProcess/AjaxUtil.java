@@ -1,11 +1,5 @@
 package com.example.hotel_project.Util.ErrorProcess;//package demo.Util.ErrorProcess;
-//
-///**
-// * Author YZQ
-// *
-// * @DATE 2019/7/9 1:05
-// */
-//
+
 //import java.util.HashMap;
 //import java.util.Map;
 //

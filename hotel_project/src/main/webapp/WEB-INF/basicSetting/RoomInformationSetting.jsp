@@ -11,7 +11,7 @@
     </h1>
     <div class="mdui-table-fluid">
         <table class="mdui-table mdui-table-hoverable">
-            <jsp:useBean id="resultRoomOfSetting" class="demo.Model.Room" scope="session"></jsp:useBean>
+            <jsp:useBean id="resultRoomOfSetting" class="com.example.hotel_project.Model.Room" scope="session"></jsp:useBean>
             <tbody>
             <tr>
                 <th>房间ID</th>

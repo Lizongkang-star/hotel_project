@@ -59,7 +59,7 @@ public class CustomerOrderController extends BaseController {
     //根据用户Id查询用户订单
     @RequestMapping("AdminCustomerOrdersQuery")
     public ModelAndView adminCustomerOrdersQuery(HttpServletRequest request, HttpServletResponse response,
-                                                 @RequestParam("IDOfCustomerRoomQuery") Integer id) {
+                                                 @RequestParam(value = "IDOfCustomerRoomQuery",required = false) Integer id) {
         HttpSession session = request.getSession();
         ans = 0;
         Customer customer = customerService.queryByUserID(id);
@@ -67,8 +67,9 @@ public class CustomerOrderController extends BaseController {
         ArrayList<Orders> ordersArrayList = ordersService.queryByCustomerName(username);
         if (ordersArrayList != null) {
             System.out.println("orderArryList is not null");
-            ans = 1;
+            ans=1;
             request.setAttribute("CustomerOrdersQueryResult", ordersArrayList);
+
         }
 
         if (ans == 1) {

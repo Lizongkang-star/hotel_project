@@ -5,7 +5,7 @@
     <h1>
         退房账单信息
     </h1>
-    <jsp:useBean id="checkoutBill" type="demo.Model.TempModel.Bill" scope="session"></jsp:useBean>
+    <jsp:useBean id="checkoutBill" type="com.example.hotel_project.Model.TempModel.Bill" scope="session"></jsp:useBean>
     客户名：
     <jsp:getProperty name="checkoutBill" property="customerID"></jsp:getProperty>
     <br>

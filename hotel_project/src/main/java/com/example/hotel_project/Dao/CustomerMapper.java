@@ -18,7 +18,6 @@ public interface CustomerMapper {
     /*
     增加
      */
-
     //增加用户
     int insert(Customer record);
 

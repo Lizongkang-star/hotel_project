@@ -46,7 +46,7 @@
             <span class="mdui-text-color-theme-accent"></span>System
         </h2>
 
-        <h4>酒店信息管理系统</h4>
+        <h3>EZO酒店信息管理系統</h3>
 
         <div class="main-btn-wrapper">
             <a href="go?url=ManagerLogin" class="mdui-btn main-btn mdui-ripple mdui-ripple-white mdui-m-r-2">经理登录</a>

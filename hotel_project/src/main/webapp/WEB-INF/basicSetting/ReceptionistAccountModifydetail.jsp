@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <%@include file="DrawerBar.html" %>
-<jsp:useBean id="oriEmployee" type="demo.Model.Employee" scope="request"></jsp:useBean>
+<jsp:useBean id="oriEmployee" type="com.example.hotel_project.Model.Employee" scope="request"></jsp:useBean>
 <html>
 <body>
 <div class="mdui-container main-container mdui-text-left">

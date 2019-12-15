@@ -4,6 +4,7 @@ package com.example.hotel_project.ServerImpl;
 import com.example.hotel_project.Model.Customer;
 import com.example.hotel_project.Model.TempModel.CustomerReport;
 import com.example.hotel_project.Util.DateTransform;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,8 +72,9 @@ public class CustomerService extends BaseService {
         Customer customer = null;
         try {
             customer = customerMapper.queryByUsernamePassword(username, password);
-            if (customer != null)
-            {System.out.println("用户获取成功");}
+            if (customer != null) {
+                System.out.println("用户获取成功");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,8 +103,9 @@ public class CustomerService extends BaseService {
         ArrayList<String> allcustomerid = null;
         try {
             //此处报错；
-            if (customerMapper.getAllCustomersId() != null)
-            {allcustomerid = customerMapper.getAllCustomersId();}
+            if (customerMapper.getAllCustomersId() != null) {
+                allcustomerid = customerMapper.getAllCustomersId();
+            }
             if (allcustomerid == null) {
                 System.out.println("查询失败...from CustomerService");
             } else {
@@ -153,35 +156,40 @@ public class CustomerService extends BaseService {
                         .build();
                 arrayList.add(customerReport1);
             }
+
         } catch (
                 Exception e) {
             e.printStackTrace();
         }
         if (arrayList != null && arrayList.size() != 0) {
+
             System.out.println("查询客户情况报表成功");
-        } else {
+        } else if (arrayList == null && arrayList.size() == 0) {
             System.out.println("查询客户情况报表失败！");
         }
         return arrayList;
     }
+
 
     public HashMap<String, Integer> getUnavailableRoom(Date startTime, Date endTime) {
         HashMap<String, Integer> hashMap = new HashMap<>(); //注意这个不能设置为null初始值，否则无法放入内容
         try {
             List<HashMap<String, Integer>> hashMaps = null;
             hashMaps = customerMapper.getUnavailableRoomTypeWithNumber(startTime, endTime);
-            if (hashMaps != null)
-            {for (HashMap<String, Integer> hashMap1 : hashMaps) {
+            if (hashMaps != null) {
+                for (HashMap<String, Integer> hashMap1 : hashMaps) {
                     //数据库的int型获取的是Long型，需要转换
                     hashMap.put(String.valueOf(hashMap1.get("room_type")), ((Number) hashMap1.get("number")).intValue());
-                }}
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (hashMap != null)
-        {System.out.println("查询成功...from CustomerService");}
-        else
-        {System.out.println("查询失败...from CustomerService");}
+        if (hashMap != null) {
+            System.out.println("查询成功...from CustomerService");
+        } else {
+            System.out.println("查询失败...from CustomerService");
+        }
         return hashMap;
     }
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80013
 File Encoding         : 65001
 
-Date: 2019-12-06 10:32:15
+Date: 2019-12-15 19:50:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,18 +30,9 @@ CREATE TABLE `administrator` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Table structure for comment
+-- Records of administrator
 -- ----------------------------
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment` (
-  `coment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_Id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `comment_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '评论时间',
-  `comment_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '评论内容',
-  `room_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '评论房间号，可直接根据订单获得',
-  `comment_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '为1是用户发表，为2是酒店发表',
-  PRIMARY KEY (`coment_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+INSERT INTO `administrator` VALUES ('1', 'admin', 'admin', 'BigFish', '男', '经理');
 
 -- ----------------------------
 -- Table structure for customer
@@ -60,6 +51,18 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Records of customer
+-- ----------------------------
+INSERT INTO `customer` VALUES ('1', 'user', 'user', '李宗康', '12444788532', '11462344478214', 'male');
+INSERT INTO `customer` VALUES ('2', 'wym1234', 'hello', '王叶明', '13365412245', '330015201906065412', 'male');
+INSERT INTO `customer` VALUES ('3', 'lql1234', 'admin', '林晴岚', '18355921456', '330652199515086610', 'male');
+INSERT INTO `customer` VALUES ('4', 'yhf1234', 'admin222', '杨浩峰', '1366355841', '413605200808083654', 'male');
+INSERT INTO `customer` VALUES ('6', 'xqh1234', 'dalianmao', '肖启航', '13864522356', '321546198012023365', 'male');
+INSERT INTO `customer` VALUES ('7', 'zjh1234', 'sunny', 'zjh', '13824511250', '330015201906065365', 'male');
+INSERT INTO `customer` VALUES ('8', 'lzk', '123456', '李宗康', '1234', '45', null);
+INSERT INTO `customer` VALUES ('9', 'wym123', '12345678', '王叶明', '13556730677', '440881199722851', 'male');
+
+-- ----------------------------
 -- Table structure for employee
 -- ----------------------------
 DROP TABLE IF EXISTS `employee`;
@@ -73,6 +76,12 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Records of employee
+-- ----------------------------
+INSERT INTO `employee` VALUES ('1', '员工1', '12345678', 'lzk', '男');
+INSERT INTO `employee` VALUES ('2', '员工2', '12345678', 'wym', '男');
+
+-- ----------------------------
 -- Table structure for hotel
 -- ----------------------------
 DROP TABLE IF EXISTS `hotel`;
@@ -82,6 +91,11 @@ CREATE TABLE `hotel` (
   `hotel_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '酒店名称',
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '酒店简介(多家酒店可建立多个数据库进行处理)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of hotel
+-- ----------------------------
+INSERT INTO `hotel` VALUES ('广东省东莞市南城区西湖路', '公交29路可以直达！', 'EZO大酒店', '南城地区最舒适最实惠的酒店之一');
 
 -- ----------------------------
 -- Table structure for orders
@@ -104,7 +118,17 @@ CREATE TABLE `orders` (
   KEY `index2` (`room_number`) USING BTREE,
   CONSTRAINT `fk1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON UPDATE CASCADE,
   CONSTRAINT `fk2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES ('1', '403', '2019-12-15 19:47:48', '2019-11-28 00:00:00', '2019-12-26 00:00:00', 'lzk', '45', '李宗康', '在住', '双人间', '300.00');
+INSERT INTO `orders` VALUES ('2', '403', '2019-12-13 09:57:04', '2019-11-30 00:00:00', '2019-12-01 00:00:00', 'wym123', '440881199722851', '王叶明', '预定', '双人间', '300.00');
+INSERT INTO `orders` VALUES ('3', '201', '2019-12-15 19:08:09', '2019-11-29 15:55:00', '2019-12-15 19:08:10', 'yhf1234', '413605200808083654', '曾俊鸿', '已退房', '单人间', null);
+INSERT INTO `orders` VALUES ('4', '502', '2019-12-13 09:57:11', '2019-11-28 00:00:00', '2019-11-29 00:00:00', 'lzk', '45', '李宗康', '预定', '双人间', '300.00');
+INSERT INTO `orders` VALUES ('9', '302', '2019-12-15 19:48:51', '2019-12-28 00:00:00', '2019-12-29 00:00:00', 'user', '11462344478214', '李宗康', '预定', null, null);
+INSERT INTO `orders` VALUES ('10', '502', '2019-12-15 19:49:07', '2019-12-19 00:00:00', '2019-12-24 00:00:00', 'user', '11462344478214', '李宗康', '预定', '双人间', '300.00');
 
 -- ----------------------------
 -- Table structure for question
@@ -118,6 +142,10 @@ CREATE TABLE `question` (
   `question_response` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '回复者帐号(客户处应该始终显示客服这两个字)',
   PRIMARY KEY (`question_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of question
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for room
@@ -139,6 +167,14 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Records of room
+-- ----------------------------
+INSERT INTO `room` VALUES ('1', '302', '单人间', '3', '朝南', '30.00', '可加床', '1', '房间宽敞明亮有阳台', '维修中');
+INSERT INTO `room` VALUES ('2', '201', '双人间', '2', '朝北', '50.00', '不可加床', '2', '房间宽敞明亮有阳台', '维修中');
+INSERT INTO `room` VALUES ('3', '403', '豪华', '2', '全方位', '80.00', '不可加床', '3', '房间宽敞明亮有阳台', '可用');
+INSERT INTO `room` VALUES ('4', '502', '总统套房', '5', '全透明', '120.00', '不可加床', '4', '房间宽敞明亮有阳台', '可用');
+
+-- ----------------------------
 -- Table structure for roomcategory
 -- ----------------------------
 DROP TABLE IF EXISTS `roomcategory`;
@@ -152,3 +188,12 @@ CREATE TABLE `roomcategory` (
   `inuse_roomnumber` int(11) DEFAULT NULL,
   PRIMARY KEY (`roomcategory_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of roomcategory
+-- ----------------------------
+INSERT INTO `roomcategory` VALUES ('1', '单人间', '150.00', '5', '9.00', '0', '0');
+INSERT INTO `roomcategory` VALUES ('2', '双人间', '300.00', '5', '8.00', '0', '0');
+INSERT INTO `roomcategory` VALUES ('3', '三人间', '500.00', '5', '9.80', '2', '0');
+INSERT INTO `roomcategory` VALUES ('4', '大床房', '350.00', '5', '9.00', '0', null);
+INSERT INTO `roomcategory` VALUES ('5', '豪华套房', '6000.00', '2', '10.00', '0', null);

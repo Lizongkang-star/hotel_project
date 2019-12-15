@@ -1,5 +1,5 @@
-<%@ page import="demo.Model.Orders" %>
-<%@ page import="demo.Util.DateTransform" %>
+<%@ page import="com.example.hotel_project.Model.Orders" %>
+<%@ page import="com.example.hotel_project.Util.DateTransform" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
@@ -12,7 +12,7 @@
     </h1>
     <div class="mdui-table-fluid">
         <table class="mdui-table mdui-table-hoverable">
-            <jsp:useBean id="queryOrder" type="demo.Model.Orders" scope="request"></jsp:useBean>
+            <jsp:useBean id="queryOrder" type="com.example.hotel_project.Model.Orders" scope="request"></jsp:useBean>
             <tbody>
             <tr>
                 <th>订单ID</th>

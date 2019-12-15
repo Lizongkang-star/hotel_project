@@ -15,7 +15,7 @@
             <br>
             退房时间：${sessionScope.dateEnd}
             <br>
-            <jsp:useBean id="LoginedCustomer" scope="session" type="demo.Model.Customer"></jsp:useBean>
+            <jsp:useBean id="LoginedCustomer" scope="session" type="com.example.hotel_project.Model.Customer"></jsp:useBean>
             客户ID：
             <jsp:getProperty name="LoginedCustomer" property="customer_id"></jsp:getProperty>
             <br>
